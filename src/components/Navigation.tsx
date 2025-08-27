@@ -1,6 +1,12 @@
 import React from "react";
 
-const Navigation = () => {
+type NavigationProps = {
+  setCurrentPage: (page: string) => void;
+  user?: any;
+  cart?: any[];
+};
+
+const Navigation = ({ setCurrentPage, user, cart }: NavigationProps) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -18,54 +24,54 @@ const Navigation = () => {
                 KOLEKCJE
               </button>
               <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                <button
+                  onClick={() => setCurrentPage("tribal")}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Tribal Collection
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                </button>
+                <button
+                  onClick={() => setCurrentPage("corduroy")}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Corduroy
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                </button>
+                <button
+                  onClick={() => setCurrentPage("velvet")}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Velvet
-                </a>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                </button>
+                <button
+                  onClick={() => setCurrentPage("plaid")}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   Pattern & Plaid
-                </a>
+                </button>
                 <div className="border-t border-gray-200 mt-2 pt-2">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100"
+                  <button
+                    onClick={() => setCurrentPage("all-products")}
+                    className="block w-full text-left px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100"
                   >
                     Wszystkie produkty
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Proste linki */}
-            <a
-              href="#"
+            <button
+              onClick={() => setCurrentPage("home")}
               className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium"
             >
-              LOOKBOOK
-            </a>
-            <a
-              href="#"
+              HOME
+            </button>
+            <button
+              onClick={() => setCurrentPage("about")}
               className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium"
             >
               O MARCE
-            </a>
+            </button>
           </nav>
 
           {/* Akcje użytkownika - uproszczone */}
@@ -127,7 +133,10 @@ const Navigation = () => {
             </div>
 
             {/* Cart z licznikiem */}
-            <button className="relative p-2 text-gray-600 hover:text-gray-900">
+            <button
+              className="relative p-2 text-gray-600 hover:text-gray-900"
+              onClick={() => setCurrentPage("cart")}
+            >
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -152,24 +161,24 @@ const Navigation = () => {
       {/* Mobile menu */}
       <div className="md:hidden border-t border-gray-200">
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <a
-            href="#"
-            className="block px-3 py-2 text-base font-medium text-gray-900"
+          <button
+            onClick={() => setCurrentPage("tribal")}
+            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-900"
           >
             Kolekcje
-          </a>
-          <a
-            href="#"
-            className="block px-3 py-2 text-base font-medium text-gray-900"
+          </button>
+          <button
+            onClick={() => setCurrentPage("home")}
+            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-900"
           >
-            Lookbook
-          </a>
-          <a
-            href="#"
-            className="block px-3 py-2 text-base font-medium text-gray-900"
+            Home
+          </button>
+          <button
+            onClick={() => setCurrentPage("about")}
+            className="block w-full text-left px-3 py-2 text-base font-medium text-gray-900"
           >
             O marce
-          </a>
+          </button>
         </div>
       </div>
     </header>

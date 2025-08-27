@@ -132,24 +132,74 @@ const Wireframe = () => {
         />
       )}
 
-  {currentPage === "about" && <AboutPage />}
-  {currentPage === "sitemap" && <SiteMap setCurrentPage={setCurrentPage} />}
+      {currentPage === "about" && <AboutPage />}
+      {currentPage === "sitemap" && <SiteMap setCurrentPage={setCurrentPage} />}
 
       <Footer />
 
       {/* Dev Navigation Helper */}
       <div className="fixed bottom-4 right-4 bg-black text-white p-2 rounded text-xs">
         <div className="mb-2 font-bold">WIREFRAME NAV:</div>
-        <button onClick={() => setCurrentPage("home")} className="block hover:underline">Home</button>
-        <button onClick={() => setCurrentPage("tribal")} className="block hover:underline">Collection</button>
-        <button onClick={() => setCurrentPage("all-products")} className="block hover:underline">All Products</button>
-        <button onClick={() => setCurrentPage("product")} className="block hover:underline">Product Page</button>
-        <button onClick={() => setCurrentPage("cart")} className="block hover:underline">Cart</button>
-        <button onClick={() => setCurrentPage("login")} className="block hover:underline">Login</button>
-        <button onClick={() => setCurrentPage("checkout")} className="block hover:underline">Checkout</button>
-        <button onClick={() => setCurrentPage("account")} className="block hover:underline">Account</button>
-        <button onClick={() => setCurrentPage("about")} className="block hover:underline">About</button>
-        <button onClick={() => setCurrentPage("sitemap")} className="block hover:underline">Site Map</button>
+        <button
+          onClick={() => setCurrentPage("home")}
+          className="block hover:underline"
+        >
+          Home
+        </button>
+        <button
+          onClick={() => setCurrentPage("tribal")}
+          className="block hover:underline"
+        >
+          Collection
+        </button>
+        <button
+          onClick={() => setCurrentPage("all-products")}
+          className="block hover:underline"
+        >
+          All Products
+        </button>
+        <button
+          onClick={() => setCurrentPage("product")}
+          className="block hover:underline"
+        >
+          Product Page
+        </button>
+        <button
+          onClick={() => setCurrentPage("cart")}
+          className="block hover:underline"
+        >
+          Cart
+        </button>
+        <button
+          onClick={() => setCurrentPage("login")}
+          className="block hover:underline"
+        >
+          Login
+        </button>
+        <button
+          onClick={() => setCurrentPage("checkout")}
+          className="block hover:underline"
+        >
+          Checkout
+        </button>
+        <button
+          onClick={() => setCurrentPage("account")}
+          className="block hover:underline"
+        >
+          Account
+        </button>
+        <button
+          onClick={() => setCurrentPage("about")}
+          className="block hover:underline"
+        >
+          About
+        </button>
+        <button
+          onClick={() => setCurrentPage("sitemap")}
+          className="block hover:underline"
+        >
+          Site Map
+        </button>
         <hr className="my-2" />
         <div className="text-xs">Cart: {cart.length} items</div>
         <div className="text-xs">User: {user ? user.name : "Guest"}</div>

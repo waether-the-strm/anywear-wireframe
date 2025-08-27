@@ -1,5 +1,3 @@
-
-
 type SiteMapProps = {
   setCurrentPage?: (page: string) => void;
 };
@@ -7,47 +5,60 @@ type SiteMapProps = {
 // Hierarchiczna struktura drzewa z mapowaniem na currentPage
 const tree = [
   {
-    label: 'Strona główna', page: 'home', children: [
+    label: "Strona główna",
+    page: "home",
+    children: [
       {
-        label: 'Kolekcje', children: [
-          { label: 'Tribal Collection', page: 'tribal' },
-          { label: 'Corduroy Collection', page: 'corduroy' },
-          { label: 'Velvet Collection', page: 'velvet' },
-          { label: 'Pattern & Plaid', page: 'plaid' },
-        ]
+        label: "Kolekcje",
+        children: [
+          { label: "Tribal Collection", page: "tribal" },
+          { label: "Corduroy Collection", page: "corduroy" },
+          { label: "Velvet Collection", page: "velvet" },
+          { label: "Pattern & Plaid", page: "plaid" },
+        ],
       },
-      { label: 'Wszystkie produkty', page: 'all-products' },
-      { label: 'Lookbook', children: [] },
-      { label: 'O marce', page: 'about' },
-    ]
+      { label: "Wszystkie produkty", page: "all-products" },
+      { label: "Lookbook", children: [] },
+      { label: "O marce", page: "about" },
+    ],
   },
   {
-    label: 'Karta produktu', page: 'product', children: []
+    label: "Karta produktu",
+    page: "product",
+    children: [],
   },
   {
-    label: 'Koszyk', page: 'cart', children: [
-      { label: 'Login', page: 'login' },
-      { label: 'Checkout', page: 'checkout', children: [
-        { label: 'Potwierdzenie zamówienia', page: 'order-confirmation' }
-      ]}
-    ]
+    label: "Koszyk",
+    page: "cart",
+    children: [
+      { label: "Login", page: "login" },
+      {
+        label: "Checkout",
+        page: "checkout",
+        children: [
+          { label: "Potwierdzenie zamówienia", page: "order-confirmation" },
+        ],
+      },
+    ],
   },
   {
-    label: 'Konto użytkownika', page: 'account', children: []
+    label: "Konto użytkownika",
+    page: "account",
+    children: [],
   },
   {
-    label: 'Mapa strony', page: 'sitemap', children: []
-  }
+    label: "Mapa strony",
+    page: "sitemap",
+    children: [],
+  },
 ];
 
 const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
-
-
-
-
   // Rekurencyjny renderer drzewa
   const renderTree = (nodes: any[], level = 0) => (
-    <ul className={level === 0 ? "mb-8" : "ml-6 border-l-2 border-gray-200 pl-4"}>
+    <ul
+      className={level === 0 ? "mb-8" : "ml-6 border-l-2 border-gray-200 pl-4"}
+    >
       {nodes.map((node) => {
         const isClickable = !!node.page;
         return (
@@ -55,14 +66,22 @@ const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
             {isClickable ? (
               <button
                 onClick={() => setCurrentPage && setCurrentPage(node.page)}
-                className={`inline-block px-3 py-1 rounded font-medium transition text-left ${level === 0 ? 'bg-gray-800 text-white' : 'bg-blue-100 text-blue-900'} border border-gray-200 hover:bg-blue-200`}
+                className={`inline-block px-3 py-1 rounded font-medium transition text-left ${
+                  level === 0
+                    ? "bg-gray-800 text-white"
+                    : "bg-blue-100 text-blue-900"
+                } border border-gray-200 hover:bg-blue-200`}
               >
                 {node.label}
               </button>
             ) : (
-              <span className="inline-block px-3 py-1 rounded bg-gray-100 text-gray-700 border border-gray-200 font-medium">{node.label}</span>
+              <span className="inline-block px-3 py-1 rounded bg-gray-100 text-gray-700 border border-gray-200 font-medium">
+                {node.label}
+              </span>
             )}
-            {node.children && node.children.length > 0 && renderTree(node.children, level + 1)}
+            {node.children &&
+              node.children.length > 0 &&
+              renderTree(node.children, level + 1)}
           </li>
         );
       })}
@@ -73,12 +92,19 @@ const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-2xl mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Mapa Strony ANYWEAR</h1>
-          <p className="text-gray-600 mb-8">Klikalne węzły prowadzą do podstron wireframe. Struktura pokazuje relacje i ścieżki użytkownika.</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            Mapa Strony ANYWEAR
+          </h1>
+          <p className="text-gray-600 mb-8">
+            Klikalne węzły prowadzą do podstron wireframe. Struktura pokazuje
+            relacje i ścieżki użytkownika.
+          </p>
           {renderTree(tree)}
 
           <div className="mt-12 p-6 bg-blue-50 rounded-lg">
-            <h3 className="text-lg font-semibold text-blue-900 mb-3">Statystyki projektu</h3>
+            <h3 className="text-lg font-semibold text-blue-900 mb-3">
+              Statystyki projektu
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div className="bg-white p-4 rounded">
                 <div className="text-2xl font-bold text-blue-600">14</div>
@@ -99,7 +125,9 @@ const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
             </div>
           </div>
           <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Kluczowe funkcjonalności</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">
+              Kluczowe funkcjonalności
+            </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <h4 className="font-medium text-gray-800 mb-2">E-commerce</h4>
@@ -111,7 +139,9 @@ const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
                 </ul>
               </div>
               <div>
-                <h4 className="font-medium text-gray-800 mb-2">Funkcje dodatkowe</h4>
+                <h4 className="font-medium text-gray-800 mb-2">
+                  Funkcje dodatkowe
+                </h4>
                 <ul className="text-sm text-gray-600 space-y-1">
                   <li>• Lookbooki dla każdej kolekcji</li>
                   <li>• Zaawansowane filtry produktów</li>
