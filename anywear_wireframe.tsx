@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navigation from "./src/components/Navigation";
 import Footer from "./src/components/Footer";
 import SiteMap from "./src/components/SiteMap";
+import ChatSupport from "./src/components/ChatSupport";
 import HomePage from "./src/views/HomePage";
 import CollectionPage from "./src/views/CollectionPage";
 import AllProductsPage from "./src/views/AllProductsPage";
@@ -142,8 +143,11 @@ const Wireframe = () => {
 
       <Footer />
 
+      {/* Chat Support Component - dostępny tylko dla zalogowanych użytkowników */}
+      {user && <ChatSupport user={user} />}
+
       {/* Dev Navigation Helper */}
-      <div className="fixed bottom-4 right-4 bg-black text-white p-2 rounded text-xs">
+      <div className="fixed top-12 z-50 right-4 bg-black text-white p-2 rounded text-xs">
         <div className="mb-2 font-bold">WIREFRAME NAV:</div>
         <button
           onClick={() => setCurrentPage("home")}
