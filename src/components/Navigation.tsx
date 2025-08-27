@@ -30,6 +30,13 @@ const Navigation = ({
 
           {/* Główna nawigacja - uproszczona */}
           <nav className="hidden md:flex space-x-8">
+            {/* Sklep (wszystkie produkty) */}
+            <button
+              onClick={() => setCurrentPage("all-products")}
+              className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium"
+            >
+              SKLEP
+            </button>
             {/* Dropdown dla kolekcji */}
             <div className="relative group">
               <button className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium">
@@ -201,7 +208,6 @@ const Navigation = ({
           >
             Kolekcje
           </button>
-          {/* HOME removed from mobile menu */}
           <button
             onClick={() => setCurrentPage("about")}
             className="block w-full text-left px-3 py-2 text-base font-medium text-gray-900"
