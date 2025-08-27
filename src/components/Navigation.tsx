@@ -7,7 +7,12 @@ type NavigationProps = {
   cart?: any[];
 };
 
-const Navigation = ({ setCurrentPage, user, setUser, cart }: NavigationProps) => {
+const Navigation = ({
+  setCurrentPage,
+  user,
+  setUser,
+  cart,
+}: NavigationProps) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4">
@@ -128,7 +133,9 @@ const Navigation = ({ setCurrentPage, user, setUser, cart }: NavigationProps) =>
                   </button>
                   <div className="border-t border-gray-200 my-2"></div>
                   <button
-                    onClick={() => { if (setUser) setUser(null); }}
+                    onClick={() => {
+                      if (setUser) setUser(null);
+                    }}
                     className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                   >
                     Logout
@@ -175,9 +182,11 @@ const Navigation = ({ setCurrentPage, user, setUser, cart }: NavigationProps) =>
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4m1.6 8L5 3H3m4 10v6a1 1 0 001 1h10a1 1 0 001-1v-6M9 19a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"
                 />
               </svg>
-              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                2
-              </span>
+              {cart && cart.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
             </button>
           </div>
         </div>

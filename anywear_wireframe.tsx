@@ -56,7 +56,12 @@ const Wireframe = () => {
 
   return (
     <div className="min-h-screen bg-white">
-  <Navigation setCurrentPage={setCurrentPage} user={user} setUser={setUser} cart={cart} />
+      <Navigation
+        setCurrentPage={setCurrentPage}
+        user={user}
+        setUser={setUser}
+        cart={cart}
+      />
 
       {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
       {currentPage === "tribal" && (
