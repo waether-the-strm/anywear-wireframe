@@ -5,6 +5,7 @@ type NavigationProps = {
   user?: any;
   setUser?: (user: any) => void;
   cart?: any[];
+  toggleWireframeNav?: () => void;
 };
 
 const Navigation = ({
@@ -12,6 +13,7 @@ const Navigation = ({
   user,
   setUser,
   cart,
+  toggleWireframeNav,
 }: NavigationProps) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -90,6 +92,26 @@ const Navigation = ({
 
           {/* Akcje użytkownika - uproszczone */}
           <div className="flex items-center space-x-4">
+            {/* Debug WireFrame Nav Toggle */}
+            <button 
+              onClick={toggleWireframeNav}
+              className="p-1 bg-black rounded-full hover:bg-gray-800 flex items-center justify-center"
+              aria-label="Toggle wireframe navigation"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="white"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                />
+              </svg>
+            </button>
             {/* Search */}
             <button className="p-2 text-gray-600 hover:text-gray-900">
               <svg

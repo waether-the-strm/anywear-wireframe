@@ -54,6 +54,7 @@ const Wireframe = () => {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState(null);
   const [checkoutAsGuest, setCheckoutAsGuest] = useState(false);
+  const [showWireframeNav, setShowWireframeNav] = useState(true);
 
   return (
     <div className="min-h-screen bg-white">
@@ -62,6 +63,7 @@ const Wireframe = () => {
         user={user}
         setUser={setUser}
         cart={cart}
+        toggleWireframeNav={() => setShowWireframeNav(!showWireframeNav)}
       />
 
       {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
@@ -147,72 +149,84 @@ const Wireframe = () => {
       {user && <ChatSupport user={user} />}
 
       {/* Dev Navigation Helper */}
-      <div className="fixed top-12 z-50 right-4 bg-black text-white p-2 rounded text-xs">
-        <div className="mb-2 font-bold">WIREFRAME NAV:</div>
-        <button
-          onClick={() => setCurrentPage("home")}
-          className="block hover:underline"
-        >
-          Home
-        </button>
-        <button
-          onClick={() => setCurrentPage("tribal")}
-          className="block hover:underline"
-        >
-          Collection
-        </button>
-        <button
-          onClick={() => setCurrentPage("all-products")}
-          className="block hover:underline"
-        >
-          All Products
-        </button>
+      {showWireframeNav && (
+        <div className="fixed top-12 z-50 right-4 bg-black text-white p-4 rounded text-xs">
+          <div className="flex justify-between items-center mb-3">
+            <div className="font-bold text-sm">WIREFRAME NAV:</div>
+            <button 
+              onClick={() => setShowWireframeNav(false)} 
+              className="text-white hover:text-red-400"
+              aria-label="Close wireframe navigation"
+            >
+              ✕
+            </button>
+          </div>
+          <div className="font-medium mb-2">Current: <span className="text-yellow-300">{currentPage}</span></div>
+          <button
+            onClick={() => setCurrentPage("home")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "home" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            Home
+          </button>
+          <button
+            onClick={() => setCurrentPage("tribal")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "tribal" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            Collection
+          </button>
+          <button
+            onClick={() => setCurrentPage("all-products")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "all-products" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            All Products
+          </button>
         <button
           onClick={() => setCurrentPage("product")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "product" ? "bg-gray-700 font-medium" : ""}`}
         >
           Product Page
         </button>
         <button
           onClick={() => setCurrentPage("cart")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "cart" ? "bg-gray-700 font-medium" : ""}`}
         >
           Cart
         </button>
         <button
           onClick={() => setCurrentPage("login")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "login" ? "bg-gray-700 font-medium" : ""}`}
         >
           Login
         </button>
         <button
           onClick={() => setCurrentPage("checkout")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "checkout" ? "bg-gray-700 font-medium" : ""}`}
         >
           Checkout
         </button>
         <button
           onClick={() => setCurrentPage("account")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "account" ? "bg-gray-700 font-medium" : ""}`}
         >
           Account
         </button>
         <button
           onClick={() => setCurrentPage("about")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "about" ? "bg-gray-700 font-medium" : ""}`}
         >
           About
         </button>
         <button
           onClick={() => setCurrentPage("sitemap")}
-          className="block hover:underline"
+          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "sitemap" ? "bg-gray-700 font-medium" : ""}`}
         >
           Site Map
         </button>
-        <hr className="my-2" />
-        <div className="text-xs">Cart: {cart.length} items</div>
-        <div className="text-xs">User: {user ? user.name : "Guest"}</div>
+        <hr className="my-3" />
+        <div className="text-xs py-1">Cart: <span className="font-medium">{cart.length} items</span></div>
+        <div className="text-xs py-1">User: <span className="font-medium">{user ? user.name : "Guest"}</span></div>
       </div>
+      )}
     </div>
   );
 };
