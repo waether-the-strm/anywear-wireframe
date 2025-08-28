@@ -15,7 +15,7 @@ const AccountPage = ({ user, setUser, setCurrentPage }) => {
   const today = "2025-08-28"; // Obecna data
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-4">
+  <div className="max-w-7xl w-full mx-auto py-10 px-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Moje konto</h1>
         <button

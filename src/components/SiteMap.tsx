@@ -44,7 +44,15 @@ const tree = [
   {
     label: "Konto użytkownika",
     page: "account",
-    children: [],
+    children: [
+      { label: "Podsumowanie", page: "account-dashboard" },
+      { label: "Dane osobowe", page: "account-personal" },
+      { label: "Adresy", page: "account-addresses" },
+      { label: "Historia zamówień", page: "account-orders" },
+      { label: "Zwroty i reklamacje", page: "account-returns" },
+      { label: "Metody płatności", page: "account-payments" },
+      { label: "Prywatność i zgody", page: "account-privacy" },
+    ],
   },
   {
     label: "Mapa strony",
