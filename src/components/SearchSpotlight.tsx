@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 type Product = {
-  id: number;
+  id: string;
   name: string;
   price: string;
   collection: string;
@@ -27,6 +27,7 @@ const SearchSpotlight = ({
   const [showResults, setShowResults] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1); // -1 oznacza brak wyboru
+  const SEARCH_BUTTON_INDEX = -2; // Specjalna wartość dla przycisku wyszukiwania
   const inputRef = useRef<HTMLInputElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null); // Ref do przycisku wyszukiwania
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -55,51 +56,110 @@ const SearchSpotlight = ({
           break;
         case "ArrowDown":
           e.preventDefault(); // Zapobiegaj przewijaniu strony
-          setSelectedIndex(prevIndex => {
+          setSelectedIndex((prevIndex) => {
             // Jeśli nie ma wyników, nic nie rób
             if (filteredProducts.length === 0) return -1;
-            
-            // Przesuń w dół lub wybierz pierwszy element, jeśli jeszcze nic nie wybrano
-            const newIndex = prevIndex === -1 ? 0 : (prevIndex < filteredProducts.length - 1 ? prevIndex + 1 : 0);            // Przewiń do wybranego elementu
-            setTimeout(() => {
-              const selectedElement = document.getElementById(
-                `search-result-${newIndex}`
-              );
-              selectedElement?.scrollIntoView({
-                block: "nearest",
-                behavior: "smooth",
-              });
-            }, 10);
+
+            // Logika nawigacji z uwzględnieniem przycisku wyszukiwania
+            let newIndex;
+
+            if (prevIndex === -1) {
+              // Nic nie jest wybrane - wybierz pierwszy element
+              newIndex = 0;
+            } else if (prevIndex === SEARCH_BUTTON_INDEX) {
+              // Jesteśmy na przycisku wyszukiwania - idź do pierwszego elementu
+              newIndex = 0;
+            } else if (prevIndex === filteredProducts.length - 1) {
+              // Jesteśmy na ostatnim produkcie - idź do przycisku wyszukiwania
+              newIndex = SEARCH_BUTTON_INDEX;
+              // Ustaw focus na przycisku wyszukiwania
+              setTimeout(() => {
+                searchButtonRef.current?.focus();
+              }, 10);
+              return newIndex;
+            } else {
+              // Normalnie przejdź do następnego elementu
+              newIndex = prevIndex + 1;
+            }
+
+            // Przewiń do wybranego elementu (tylko dla produktów)
+            if (newIndex >= 0) {
+              setTimeout(() => {
+                const selectedElement = document.getElementById(
+                  `search-result-${newIndex}`
+                );
+                selectedElement?.scrollIntoView({
+                  block: "nearest",
+                  behavior: "smooth",
+                });
+              }, 10);
+            }
 
             return newIndex;
           });
           break;
         case "ArrowUp":
           e.preventDefault(); // Zapobiegaj przewijaniu strony
-          setSelectedIndex(prevIndex => {
+          setSelectedIndex((prevIndex) => {
             // Jeśli nie ma wyników, nic nie rób
             if (filteredProducts.length === 0) return -1;
-            
-            // Przesuń w górę lub wybierz ostatni element, jeśli jeszcze nic nie wybrano
-            const newIndex = prevIndex === -1 ? filteredProducts.length - 1 : (prevIndex > 0 ? prevIndex - 1 : filteredProducts.length - 1);
-            
-            // Przewiń do wybranego elementu
-            setTimeout(() => {
-              const selectedElement = document.getElementById(`search-result-${newIndex}`);
-              selectedElement?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            }, 10);
-            
+
+            // Logika nawigacji w górę z uwzględnieniem przycisku wyszukiwania
+            let newIndex;
+
+            if (prevIndex === -1) {
+              // Nic nie jest wybrane - wybierz ostatni element
+              newIndex = filteredProducts.length - 1;
+            } else if (prevIndex === 0) {
+              // Jesteśmy na pierwszym produkcie - idź do przycisku wyszukiwania
+              newIndex = SEARCH_BUTTON_INDEX;
+              // Ustaw focus na przycisku wyszukiwania
+              setTimeout(() => {
+                searchButtonRef.current?.focus();
+              }, 10);
+              return newIndex;
+            } else if (prevIndex === SEARCH_BUTTON_INDEX) {
+              // Jesteśmy na przycisku wyszukiwania - idź do ostatniego elementu
+              newIndex = filteredProducts.length - 1;
+            } else {
+              // Normalnie przejdź do poprzedniego elementu
+              newIndex = prevIndex - 1;
+            }
+
+            // Przewiń do wybranego elementu (tylko dla produktów)
+            if (newIndex >= 0) {
+              setTimeout(() => {
+                const selectedElement = document.getElementById(
+                  `search-result-${newIndex}`
+                );
+                selectedElement?.scrollIntoView({
+                  block: "nearest",
+                  behavior: "smooth",
+                });
+              }, 10);
+            }
+
             return newIndex;
           });
           break;
         case "Enter":
-          // Sprawdź, czy przycisk wyszukiwania ma focus
-          const searchButtonHasFocus = document.activeElement === searchButtonRef.current;
-          
+          // Sprawdź, czy przycisk wyszukiwania ma focus lub czy jesteśmy na indeksie przycisku wyszukiwania
+          const searchButtonHasFocus =
+            document.activeElement === searchButtonRef.current ||
+            selectedIndex === SEARCH_BUTTON_INDEX;
+
           // Jeśli element jest wybrany i przycisk wyszukiwania NIE ma focusa, przejdź do produktu
-          if (selectedIndex >= 0 && selectedIndex < filteredProducts.length && !searchButtonHasFocus) {
+          if (
+            selectedIndex >= 0 &&
+            selectedIndex < filteredProducts.length &&
+            !searchButtonHasFocus
+          ) {
             e.preventDefault();
             handleProductClick(filteredProducts[selectedIndex].id);
+          } else if (searchButtonHasFocus) {
+            // Jeśli przycisk wyszukiwania ma focus, wykonaj wyszukiwanie
+            e.preventDefault();
+            onSearch(query);
           }
           // W przeciwnym razie formularz obsłuży submit normalnie (idzie do wyników wyszukiwania)
           break;
@@ -114,6 +174,19 @@ const SearchSpotlight = ({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose, filteredProducts, selectedIndex]);
+
+  // Efekt obsługujący zmiany selectedIndex
+  useEffect(() => {
+    // Gdy indeks to SEARCH_BUTTON_INDEX, ustaw focus na przycisku wyszukiwania
+    if (selectedIndex === SEARCH_BUTTON_INDEX && searchButtonRef.current) {
+      searchButtonRef.current.focus();
+    } else if (selectedIndex >= 0) {
+      // Gdy indeks wskazuje na produkt, upewnij się że przycisk nie ma focusa
+      if (document.activeElement === searchButtonRef.current) {
+        inputRef.current?.focus();
+      }
+    }
+  }, [selectedIndex]);
 
   // Filtrowanie produktów
   useEffect(() => {
@@ -276,8 +349,14 @@ const SearchSpotlight = ({
             <button
               ref={searchButtonRef}
               type="submit"
-              className="mt-3 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition"
+              className={`mt-3 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition ${
+                selectedIndex === SEARCH_BUTTON_INDEX
+                  ? "ring-2 ring-gray-500"
+                  : ""
+              }`}
               onClick={() => setSelectedIndex(-1)} // Reset zaznaczenia przy kliknięciu przycisku
+              onFocus={() => setSelectedIndex(SEARCH_BUTTON_INDEX)}
+              onBlur={() => setSelectedIndex(-1)}
             >
               Wyszukaj
             </button>
