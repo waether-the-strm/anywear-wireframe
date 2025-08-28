@@ -73,24 +73,24 @@ const SiteMap = ({ setCurrentPage }: SiteMapProps) => {
         const isClickable = !!node.page;
         return (
           <li key={node.label} className="mb-2">
-                {isClickable ? (
-                  <Link
-                    to={
-                      node.page.startsWith("account-")
-                        ? `/account?tab=${node.page.replace('account-','')}`
-                        : node.page.startsWith("/")
-                        ? node.page
-                        : `/${node.page}`
-                    }
-                    className={`inline-block px-3 py-1 rounded font-medium transition text-left ${
-                      level === 0
-                        ? "bg-gray-800 text-white"
-                        : "bg-blue-100 text-blue-900"
-                    } border border-gray-200 hover:bg-blue-200`}
-                  >
-                    {node.label}
-                  </Link>
-                ) : (
+            {isClickable ? (
+              <Link
+                to={
+                  node.page.startsWith("account-")
+                    ? `/account?tab=${node.page.replace("account-", "")}`
+                    : node.page.startsWith("/")
+                    ? node.page
+                    : `/${node.page}`
+                }
+                className={`inline-block px-3 py-1 rounded font-medium transition text-left ${
+                  level === 0
+                    ? "bg-gray-800 text-white"
+                    : "bg-blue-100 text-blue-900"
+                } border border-gray-200 hover:bg-blue-200`}
+              >
+                {node.label}
+              </Link>
+            ) : (
               <span className="inline-block px-3 py-1 rounded bg-gray-100 text-gray-700 border border-gray-200 font-medium">
                 {node.label}
               </span>

@@ -10,12 +10,20 @@ const TABS = [
   { key: "privacy", label: "Prywatność i zgody" },
 ];
 
-const AccountPage = ({ user, setUser, setCurrentPage }) => {
-  const [tab, setTab] = useState("dashboard");
+const AccountPage = ({
+  user,
+  setUser,
+  setCurrentPage,
+  tab: propTab,
+  setTab: propSetTab,
+}) => {
+  const [localTab, localSetTab] = useState(propTab || "dashboard");
+  const tab = propTab !== undefined ? propTab : localTab;
+  const setTab = propSetTab !== undefined ? propSetTab : localSetTab;
   const today = "2025-08-28"; // Obecna data
 
   return (
-  <div className="max-w-7xl w-full mx-auto py-10 px-4">
+    <div className="max-w-7xl w-full mx-auto py-10 px-4">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Moje konto</h1>
         <button
@@ -41,6 +49,7 @@ const AccountPage = ({ user, setUser, setCurrentPage }) => {
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
                 onClick={() => setTab(key)}
+                type="button"
               >
                 {label}
               </button>

@@ -46,10 +46,30 @@ const Navigation = ({
                 KOLEKCJE
               </span>
               <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <Link to="/tribal" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tribal Collection</Link>
-                <Link to="/corduroy" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Corduroy</Link>
-                <Link to="/velvet" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Velvet</Link>
-                <Link to="/plaid" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pattern & Plaid</Link>
+                <Link
+                  to="/tribal"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Tribal Collection
+                </Link>
+                <Link
+                  to="/corduroy"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Corduroy
+                </Link>
+                <Link
+                  to="/velvet"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Velvet
+                </Link>
+                <Link
+                  to="/plaid"
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Pattern & Plaid
+                </Link>
                 <div className="border-t border-gray-200 mt-2 pt-2">
                   <Link
                     to="/all-products"
@@ -74,7 +94,7 @@ const Navigation = ({
           {/* Akcje użytkownika - uproszczone */}
           <div className="flex items-center space-x-4">
             {/* Debug WireFrame Nav Toggle */}
-            <button 
+            <button
               onClick={toggleWireframeNav}
               className="p-1 bg-black rounded-full hover:bg-gray-800 flex items-center justify-center"
               aria-label="Toggle wireframe navigation"

@@ -25,12 +25,10 @@ import AboutPage from "./src/views/AboutPage";
 
 // Główny komponent aplikacji
 const WireframeApp = () => {
-  // Przykładowe dane i stany (możesz dostosować do swojego modelu)
   const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [checkoutAsGuest, setCheckoutAsGuest] = useState(false);
   const [showWireframeNav, setShowWireframeNav] = useState(false);
-  // Przykładowe produkty (możesz podmienić na własne źródło danych)
   const products = [];
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,6 +43,14 @@ const WireframeApp = () => {
     "/account": "Account",
     "/about": "About",
     "/sitemap": "Site Map",
+  };
+
+  // Obsługa tabów na stronie konta przez query param
+  const searchParams = new URLSearchParams(location.search);
+  const tab = searchParams.get("tab") || "dashboard";
+  const setTab = (newTab) => {
+    searchParams.set("tab", newTab);
+    navigate({ pathname: "/account", search: `?${searchParams.toString()}` });
   };
 
   return (
@@ -166,6 +172,8 @@ const WireframeApp = () => {
                 user={user}
                 setUser={setUser}
                 setCurrentPage={(path) => navigate(path)}
+                tab={tab}
+                setTab={setTab}
               />
             }
           />
