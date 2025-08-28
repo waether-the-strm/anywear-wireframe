@@ -155,9 +155,15 @@ const WireframeApp = () => {
           isOpen={showSearch}
           onClose={() => setShowSearch(false)}
           onSearch={(query) => {
-            navigate(`/search?q=${encodeURIComponent(query)}`);
+            // Jeśli zapytanie zaczyna się od "/", traktuj je jako bezpośrednią ścieżkę
+            if (query.startsWith('/')) {
+              navigate(query);
+            } else {
+              navigate(`/search?q=${encodeURIComponent(query)}`);
+            }
             setShowSearch(false);
           }}
+          products={products}
         />
 
         <Routes>
