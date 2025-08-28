@@ -32,29 +32,29 @@ const WireframeApp = () => {
   const [checkoutAsGuest, setCheckoutAsGuest] = useState(false);
   const [showWireframeNav, setShowWireframeNav] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  
+
   // Dodajemy nasłuchiwanie skrótów klawiszowych dla wyszukiwarki
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Pomijamy, jeśli użytkownik pisze w jakimś polu tekstowym
       if (
-        e.target instanceof HTMLInputElement || 
+        e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement ||
         e.target instanceof HTMLSelectElement
       ) {
         return;
       }
-      
+
       // Otwórz wyszukiwarkę za pomocą "/" lub Ctrl+K / Cmd+K
       if (
-        (e.key === "/" && !e.ctrlKey && !e.metaKey) || 
+        (e.key === "/" && !e.ctrlKey && !e.metaKey) ||
         ((e.ctrlKey || e.metaKey) && e.key === "k")
       ) {
         e.preventDefault();
         setShowSearch(true);
       }
     };
-    
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
@@ -149,7 +149,7 @@ const WireframeApp = () => {
           toggleWireframeNav={() => setShowWireframeNav(!showWireframeNav)}
           toggleSearch={() => setShowSearch(true)}
         />
-        
+
         {/* Komponent wyszukiwania w stylu spotlight */}
         <SearchSpotlight
           isOpen={showSearch}
