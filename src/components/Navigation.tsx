@@ -155,18 +155,30 @@ const Navigation = ({
                     />
                   </svg>
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30">
                   <button
                     onClick={() => setCurrentPage("account")}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    My Account
+                    Moje konto
                   </button>
                   <button
-                    onClick={() => setCurrentPage("cart")}
+                    onClick={() => setCurrentPage("account?tab=orders")}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
-                    Orders
+                    Historia zamówień
+                  </button>
+                  <button
+                    onClick={() => setCurrentPage("account?tab=personal")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Dane osobowe
+                  </button>
+                  <button
+                    onClick={() => setCurrentPage("account?tab=addresses")}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Adresy
                   </button>
                   <div className="border-t border-gray-200 my-2"></div>
                   <button
@@ -175,7 +187,7 @@ const Navigation = ({
                     }}
                     className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                   >
-                    Logout
+                    Wyloguj się
                   </button>
                 </div>
               </div>
