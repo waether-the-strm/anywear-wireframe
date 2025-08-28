@@ -41,11 +41,14 @@ const Navigation = ({
               SKLEP
             </Link>
             {/* Dropdown dla kolekcji */}
-            <div className="relative group">
-              <span className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium cursor-default">
+            <div className="relative group flex items-center">
+              <span className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium cursor-default select-none">
                 KOLEKCJE
               </span>
-              <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div
+                className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30"
+                style={{ minWidth: '200px' }}
+              >
                 <Link
                   to="/tribal"
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
