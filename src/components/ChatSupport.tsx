@@ -1,7 +1,6 @@
 import React from 'react';
 import { ChatProvider } from './ChatContext';
 import ChatWindow from './ChatWindow';
-import LiveAssistant from './LiveAssistant';
 
 type ChatSupportProps = {
   user?: {
@@ -15,7 +14,6 @@ const ChatSupport: React.FC<ChatSupportProps> = ({ user }) => {
   return (
     <ChatProvider>
       <ChatWindow userName={user?.name} />
-      <LiveAssistant userName={user?.name} />
     </ChatProvider>
   );
 };
