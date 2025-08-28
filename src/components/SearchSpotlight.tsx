@@ -322,21 +322,7 @@ const SearchSpotlight = ({
                   </span>
                   aby otworzyć wyszukiwarkę
                 </div>
-                {filteredProducts.length > 0 && (
-                  <div className="mt-1 text-xs text-gray-400">
-                    <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mr-1">
-                      ↑
-                    </span>
-                    <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mr-1">
-                      ↓
-                    </span>
-                    do nawigacji,
-                    <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mx-1">
-                      Enter
-                    </span>
-                    aby wybrać
-                  </div>
-                )}
+                {/* Nawigacja strzałkami przeniesiona do prawej strony nad listą wyników */}
               </div>
               <button
                 type="button"
@@ -365,102 +351,120 @@ const SearchSpotlight = ({
 
         {/* Podpowiadane produkty */}
         {query && (
-          <div className="max-h-[400px] overflow-y-auto border-t">
-            {isLoading ? (
-              <div className="p-4 text-center text-gray-500">
-                <div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mr-2"></div>
-                Wyszukiwanie...
-              </div>
-            ) : (
-              <>
-                {filteredProducts.length > 0 ? (
-                  <div>
-                    <div className="p-3 bg-gray-50 text-sm text-gray-500 border-b">
-                      Znaleziono {filteredProducts.length}{" "}
-                      {filteredProducts.length === 1
-                        ? "produkt"
-                        : filteredProducts.length < 5
-                        ? "produkty"
-                        : "produktów"}
-                    </div>
-                    <ul>
-                      {filteredProducts.map((product, index) => (
-                        <li
-                          key={product.id}
-                          id={`search-result-${index}`}
-                          className="border-b last:border-0 animate-fade-in search-result-focus"
-                          style={{
-                            animationDelay: `${index * 50}ms`,
-                            animationDuration: "300ms",
-                          }}
-                        >
-                          <button
-                            onClick={() => handleProductClick(product.id)}
-                            onMouseEnter={() => setSelectedIndex(index)}
-                            className={`flex items-center w-full p-3 transition text-left ${
-                              selectedIndex === index
-                                ? "bg-gray-100 ring-2 ring-gray-300 ring-inset"
-                                : "hover:bg-gray-50"
-                            }`}
+          <div className="max-h-[400px] overflow-y-auto border-t flex flex-col">
+            <div className="flex-1 min-h-0">
+              {isLoading ? (
+                <div className="p-4 text-center text-gray-500">
+                  <div className="inline-block w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin mr-2"></div>
+                  Wyszukiwanie...
+                </div>
+              ) : (
+                <>
+                  {filteredProducts.length > 0 ? (
+                    <div>
+                      <div className="p-3 bg-gray-50 text-sm text-gray-500 border-b flex items-center justify-between">
+                        <span>
+                          Znaleziono {filteredProducts.length}{" "}
+                          {filteredProducts.length === 1
+                            ? "produkt"
+                            : filteredProducts.length < 5
+                            ? "produkty"
+                            : "produktów"}
+                        </span>
+                        <span className="hidden sm:flex items-center text-xs text-gray-400 ml-4 whitespace-nowrap">
+                          <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mr-1">
+                            ↑
+                          </span>
+                          <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mr-1">
+                            ↓
+                          </span>
+                          do nawigacji,
+                          <span className="inline-block bg-gray-200 px-1.5 py-0.5 rounded mx-1">
+                            Enter
+                          </span>
+                          aby wybrać
+                        </span>
+                      </div>
+                      <ul>
+                        {filteredProducts.map((product, index) => (
+                          <li
+                            key={product.id}
+                            id={`search-result-${index}`}
+                            className="border-b last:border-0 animate-fade-in search-result-focus"
+                            style={{
+                              animationDelay: `${index * 50}ms`,
+                              animationDuration: "300ms",
+                            }}
                           >
-                            {/* Miniaturka produktu */}
-                            <div className="w-16 h-16 bg-gray-100 flex-shrink-0 rounded overflow-hidden mr-3">
-                              <img
-                                src={product.image}
-                                alt={product.name}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  (e.target as HTMLImageElement).src =
-                                    "https://via.placeholder.com/80";
-                                }}
-                              />
-                            </div>
-                            <div className="flex-1">
-                              <div className="font-medium">{product.name}</div>
-                              <div className="text-sm text-gray-500">
-                                {product.collection.toUpperCase()} ·{" "}
-                                {product.price}
+                            <button
+                              onClick={() => handleProductClick(product.id)}
+                              onMouseEnter={() => setSelectedIndex(index)}
+                              className={`flex items-center w-full p-3 transition text-left ${
+                                selectedIndex === index
+                                  ? "bg-gray-100 ring-2 ring-gray-300 ring-inset"
+                                  : "hover:bg-gray-50"
+                              }`}
+                            >
+                              {/* Miniaturka produktu */}
+                              <div className="w-16 h-16 bg-gray-100 flex-shrink-0 rounded overflow-hidden mr-3">
+                                <img
+                                  src={product.image}
+                                  alt={product.name}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src =
+                                      "https://via.placeholder.com/80";
+                                  }}
+                                />
                               </div>
-                            </div>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : (
-                  showResults && (
-                    <div className="p-4 text-center text-gray-500">
-                      Nie znaleziono produktów pasujących do "{query}"
+                              <div className="flex-1">
+                                <div className="font-medium">
+                                  {product.name}
+                                </div>
+                                <div className="text-sm text-gray-500">
+                                  {product.collection.toUpperCase()} ·{" "}
+                                  {product.price}
+                                </div>
+                              </div>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                  )
-                )}
-              </>
-            )}
-
-            {/* Popularne wyszukiwania */}
-            <div className="p-4 bg-gray-50 border-t">
-              <div className="text-sm text-gray-500 mb-2">
-                Popularne wyszukiwania:
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {["tribal", "spodnie", "bluzy", "czapki", "kurtki"].map(
-                  (suggestion) => (
-                    <button
-                      key={suggestion}
-                      type="button"
-                      onClick={() => {
-                        setQuery(suggestion);
-                      }}
-                      className="px-3 py-1 bg-gray-200 rounded-full text-sm text-gray-700 hover:bg-gray-300"
-                    >
-                      {suggestion}
-                    </button>
-                  )
-                )}
-              </div>
+                  ) : (
+                    showResults && (
+                      <div className="p-4 text-center text-gray-500">
+                        Nie znaleziono produktów pasujących do "{query}"
+                      </div>
+                    )
+                  )}
+                </>
+              )}
             </div>
           </div>
         )}
+        {/* Popularne wyszukiwania - sticky bottom */}
+        <div className="p-4 bg-gray-50 border-t sticky bottom-0 z-10">
+          <div className="text-sm text-gray-500 mb-2">
+            Popularne wyszukiwania:
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {["tribal", "spodnie", "bluzy", "czapki", "kurtki"].map(
+              (suggestion) => (
+                <button
+                  key={suggestion}
+                  type="button"
+                  onClick={() => {
+                    setQuery(suggestion);
+                  }}
+                  className="px-3 py-1 bg-gray-200 rounded-full text-sm text-gray-700 hover:bg-gray-300"
+                >
+                  {suggestion}
+                </button>
+              )
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
