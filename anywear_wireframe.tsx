@@ -61,7 +61,7 @@ const WireframeApp = () => {
   // Przykładowe produkty (mock)
   const products = [
     {
-      id: 1,
+      id: "1",
       name: "Tribal T-shirt Black",
       price: "149,00 zł",
       collection: "tribal",
@@ -70,7 +70,7 @@ const WireframeApp = () => {
         "https://anywear.pl/wp-content/uploads/2023/07/tribal-t-shirt-black.jpg",
     },
     {
-      id: 2,
+      id: "2",
       name: "Tribal hoodie black",
       price: "249,00 zł",
       collection: "tribal",
@@ -79,7 +79,7 @@ const WireframeApp = () => {
         "https://anywear.pl/wp-content/uploads/2023/07/tribal-hoodie-black.jpg",
     },
     {
-      id: 3,
+      id: "3",
       name: "Velvet pants beige",
       price: "149,00 zł",
       collection: "velvet",
@@ -88,7 +88,7 @@ const WireframeApp = () => {
         "https://anywear.pl/wp-content/uploads/2023/07/velvet-pant-beige.jpg",
     },
     {
-      id: 4,
+      id: "4",
       name: "Corduroy pants navy",
       price: "249,00 zł",
       collection: "corduroy",
@@ -97,7 +97,7 @@ const WireframeApp = () => {
         "https://anywear.pl/wp-content/uploads/2023/07/corduroy-pants-navy.jpg",
     },
     {
-      id: 5,
+      id: "5",
       name: "Plaid pants grey",
       price: "149,00 zł",
       collection: "plaid",
@@ -106,7 +106,7 @@ const WireframeApp = () => {
         "https://anywear.pl/wp-content/uploads/2023/07/plaid-pants-grey.jpg",
     },
     {
-      id: 6,
+      id: "6",
       name: "Anywear cap black",
       price: "69,00 zł",
       collection: "accessories",
@@ -156,7 +156,7 @@ const WireframeApp = () => {
           onClose={() => setShowSearch(false)}
           onSearch={(query) => {
             // Jeśli zapytanie zaczyna się od "/", traktuj je jako bezpośrednią ścieżkę
-            if (query.startsWith('/')) {
+            if (query.startsWith("/")) {
               navigate(query);
             } else {
               navigate(`/search?q=${encodeURIComponent(query)}`);
