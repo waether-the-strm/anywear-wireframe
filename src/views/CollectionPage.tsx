@@ -1,7 +1,7 @@
 import React from "react";
 
 const CollectionPage = ({ collection, products, setCurrentPage }) => (
-  <div className="max-w-6xl mx-auto px-4 py-8">
+  <div className="max-w-7xl mx-auto px-4 py-8 w-full">
     {/* Collection Header */}
     <div className="mb-12">
       <div className="bg-gray-200 h-64 mb-6 flex items-center justify-center">

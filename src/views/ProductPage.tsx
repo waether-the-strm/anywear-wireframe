@@ -1,7 +1,7 @@
 import React from "react";
 
 const ProductPage = ({ cart, setCart }) => (
-  <div className="max-w-6xl mx-auto px-4 py-8">
+  <div className="max-w-7xl mx-auto px-4 py-8 w-full">
     <div className="grid md:grid-cols-2 gap-12">
       {/* Product Images */}
       <div>

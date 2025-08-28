@@ -1,7 +1,7 @@
 import React from "react";
 
 const AllProductsPage = ({ products, setCurrentPage }) => (
-  <div className="max-w-6xl mx-auto px-4 py-8">
+  <div className="max-w-7xl mx-auto px-4 py-8 w-full">
     <h1 className="text-4xl font-bold mb-8">WSZYSTKIE PRODUKTY</h1>
     <div className="flex flex-col md:flex-row gap-8">
       {/* Filters Sidebar */}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type NavigationProps = {
   setCurrentPage: (page: string) => void;
@@ -21,73 +22,53 @@ const Navigation = ({
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button
+            <Link
+              to="/"
               className="text-xl font-bold focus:outline-none"
-              onClick={() => setCurrentPage("home")}
               aria-label="Go to homepage"
             >
               ANYWEAR
-            </button>
+            </Link>
           </div>
 
           {/* Główna nawigacja - uproszczona */}
           <nav className="hidden md:flex space-x-8">
             {/* Sklep (wszystkie produkty) */}
-            <button
-              onClick={() => setCurrentPage("all-products")}
+            <Link
+              to="/all-products"
               className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium"
             >
               SKLEP
-            </button>
+            </Link>
             {/* Dropdown dla kolekcji */}
             <div className="relative group">
-              <button className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium">
+              <span className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium cursor-default">
                 KOLEKCJE
-              </button>
+              </span>
               <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                <button
-                  onClick={() => setCurrentPage("tribal")}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Tribal Collection
-                </button>
-                <button
-                  onClick={() => setCurrentPage("corduroy")}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Corduroy
-                </button>
-                <button
-                  onClick={() => setCurrentPage("velvet")}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Velvet
-                </button>
-                <button
-                  onClick={() => setCurrentPage("plaid")}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Pattern & Plaid
-                </button>
+                <Link to="/tribal" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tribal Collection</Link>
+                <Link to="/corduroy" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Corduroy</Link>
+                <Link to="/velvet" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Velvet</Link>
+                <Link to="/plaid" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pattern & Plaid</Link>
                 <div className="border-t border-gray-200 mt-2 pt-2">
-                  <button
-                    onClick={() => setCurrentPage("all-products")}
+                  <Link
+                    to="/all-products"
                     className="block w-full text-left px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100"
                   >
                     Wszystkie produkty
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
 
             {/* Proste linki */}
             {/* HOME removed, logo is now home */}
-            <button
-              onClick={() => setCurrentPage("about")}
+            <Link
+              to="/about"
               className="text-gray-900 hover:text-gray-600 px-3 py-2 font-medium"
             >
               O MARCE
-            </button>
+            </Link>
           </nav>
 
           {/* Akcje użytkownika - uproszczone */}
