@@ -57,176 +57,177 @@ const Wireframe = () => {
   const [showWireframeNav, setShowWireframeNav] = useState(true);
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navigation
-        setCurrentPage={setCurrentPage}
-        user={user}
-        setUser={setUser}
-        cart={cart}
-        toggleWireframeNav={() => setShowWireframeNav(!showWireframeNav)}
-      />
-
-      {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
-      {currentPage === "tribal" && (
-        <CollectionPage
-          collection="tribal"
-          products={products}
+    <div className="min-h-screen flex flex-col bg-white">
+      <div className="flex-1 flex flex-col">
+        <Navigation
           setCurrentPage={setCurrentPage}
-        />
-      )}
-      {currentPage === "corduroy" && (
-        <CollectionPage
-          collection="corduroy"
-          products={products}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-      {currentPage === "velvet" && (
-        <CollectionPage
-          collection="velvet"
-          products={products}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-      {currentPage === "plaid" && (
-        <CollectionPage
-          collection="plaid"
-          products={products}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-      {currentPage === "all-products" && (
-        <AllProductsPage products={products} setCurrentPage={setCurrentPage} />
-      )}
-      {currentPage === "product" && (
-        <ProductPage cart={cart} setCart={setCart} />
-      )}
-      {currentPage === "cart" && (
-        <CartPage
-          cart={cart}
-          setCurrentPage={setCurrentPage}
-          setCart={setCart}
-        />
-      )}
-      {currentPage === "login" && (
-        <LoginPage
-          setUser={setUser}
-          setCurrentPage={setCurrentPage}
-          cart={cart}
-        />
-      )}
-      {currentPage === "checkout" && (
-        <CheckoutPage
-          user={user}
-          cart={cart}
-          setCurrentPage={setCurrentPage}
-          checkoutAsGuest={checkoutAsGuest}
-          setCheckoutAsGuest={setCheckoutAsGuest}
-        />
-      )}
-      {currentPage === "order-confirmation" && (
-        <OrderConfirmationPage
-          cart={cart}
-          user={user}
-          setCurrentPage={setCurrentPage}
-          setCart={setCart}
-        />
-      )}
-      {currentPage === "account" && (
-        <AccountPage
           user={user}
           setUser={setUser}
-          setCurrentPage={setCurrentPage}
+          cart={cart}
+          toggleWireframeNav={() => setShowWireframeNav(!showWireframeNav)}
         />
-      )}
 
-      {currentPage === "about" && <AboutPage />}
-      {currentPage === "sitemap" && <SiteMap setCurrentPage={setCurrentPage} />}
+        {currentPage === "home" && <HomePage setCurrentPage={setCurrentPage} />}
+        {currentPage === "tribal" && (
+          <CollectionPage
+            collection="tribal"
+            products={products}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        {currentPage === "corduroy" && (
+          <CollectionPage
+            collection="corduroy"
+            products={products}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        {currentPage === "velvet" && (
+          <CollectionPage
+            collection="velvet"
+            products={products}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        {currentPage === "plaid" && (
+          <CollectionPage
+            collection="plaid"
+            products={products}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
+        {currentPage === "all-products" && (
+          <AllProductsPage products={products} setCurrentPage={setCurrentPage} />
+        )}
+        {currentPage === "product" && (
+          <ProductPage cart={cart} setCart={setCart} />
+        )}
+        {currentPage === "cart" && (
+          <CartPage
+            cart={cart}
+            setCurrentPage={setCurrentPage}
+            setCart={setCart}
+          />
+        )}
+        {currentPage === "login" && (
+          <LoginPage
+            setUser={setUser}
+            setCurrentPage={setCurrentPage}
+            cart={cart}
+          />
+        )}
+        {currentPage === "checkout" && (
+          <CheckoutPage
+            user={user}
+            cart={cart}
+            setCurrentPage={setCurrentPage}
+            checkoutAsGuest={checkoutAsGuest}
+            setCheckoutAsGuest={setCheckoutAsGuest}
+          />
+        )}
+        {currentPage === "order-confirmation" && (
+          <OrderConfirmationPage
+            cart={cart}
+            user={user}
+            setCurrentPage={setCurrentPage}
+            setCart={setCart}
+          />
+        )}
+        {currentPage === "account" && (
+          <AccountPage
+            user={user}
+            setUser={setUser}
+            setCurrentPage={setCurrentPage}
+          />
+        )}
 
-      <Footer />
+        {currentPage === "about" && <AboutPage />}
+        {currentPage === "sitemap" && <SiteMap setCurrentPage={setCurrentPage} />}
 
-      {/* Chat Support Component - dostępny tylko dla zalogowanych użytkowników */}
-      {user && <ChatSupport user={user} />}
+        {/* Chat Support Component - dostępny tylko dla zalogowanych użytkowników */}
+        {user && <ChatSupport user={user} />}
 
-      {/* Dev Navigation Helper */}
-      {showWireframeNav && (
-        <div className="fixed top-12 z-50 right-4 bg-black text-white p-4 rounded text-xs">
-          <div className="flex justify-between items-center mb-3">
-            <div className="font-bold text-sm">WIREFRAME NAV:</div>
-            <button 
-              onClick={() => setShowWireframeNav(false)} 
-              className="text-white hover:text-red-400"
-              aria-label="Close wireframe navigation"
+        {/* Dev Navigation Helper */}
+        {showWireframeNav && (
+          <div className="fixed top-12 z-50 right-4 bg-black text-white p-4 rounded text-xs">
+            <div className="flex justify-between items-center mb-3">
+              <div className="font-bold text-sm">WIREFRAME NAV:</div>
+              <button 
+                onClick={() => setShowWireframeNav(false)} 
+                className="text-white hover:text-red-400"
+                aria-label="Close wireframe navigation"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="font-medium mb-2">Current: <span className="text-yellow-300">{currentPage}</span></div>
+            <button
+              onClick={() => setCurrentPage("home")}
+              className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "home" ? "bg-gray-700 font-medium" : ""}`}
             >
-              ✕
+              Home
             </button>
-          </div>
-          <div className="font-medium mb-2">Current: <span className="text-yellow-300">{currentPage}</span></div>
+            <button
+              onClick={() => setCurrentPage("tribal")}
+              className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "tribal" ? "bg-gray-700 font-medium" : ""}`}
+            >
+              Collection
+            </button>
+            <button
+              onClick={() => setCurrentPage("all-products")}
+              className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "all-products" ? "bg-gray-700 font-medium" : ""}`}
+            >
+              All Products
+            </button>
           <button
-            onClick={() => setCurrentPage("home")}
-            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "home" ? "bg-gray-700 font-medium" : ""}`}
+            onClick={() => setCurrentPage("product")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "product" ? "bg-gray-700 font-medium" : ""}`}
           >
-            Home
+            Product Page
           </button>
           <button
-            onClick={() => setCurrentPage("tribal")}
-            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "tribal" ? "bg-gray-700 font-medium" : ""}`}
+            onClick={() => setCurrentPage("cart")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "cart" ? "bg-gray-700 font-medium" : ""}`}
           >
-            Collection
+            Cart
           </button>
           <button
-            onClick={() => setCurrentPage("all-products")}
-            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "all-products" ? "bg-gray-700 font-medium" : ""}`}
+            onClick={() => setCurrentPage("login")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "login" ? "bg-gray-700 font-medium" : ""}`}
           >
-            All Products
+            Login
           </button>
-        <button
-          onClick={() => setCurrentPage("product")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "product" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Product Page
-        </button>
-        <button
-          onClick={() => setCurrentPage("cart")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "cart" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Cart
-        </button>
-        <button
-          onClick={() => setCurrentPage("login")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "login" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Login
-        </button>
-        <button
-          onClick={() => setCurrentPage("checkout")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "checkout" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Checkout
-        </button>
-        <button
-          onClick={() => setCurrentPage("account")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "account" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Account
-        </button>
-        <button
-          onClick={() => setCurrentPage("about")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "about" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          About
-        </button>
-        <button
-          onClick={() => setCurrentPage("sitemap")}
-          className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "sitemap" ? "bg-gray-700 font-medium" : ""}`}
-        >
-          Site Map
-        </button>
-        <hr className="my-3" />
-        <div className="text-xs py-1">Cart: <span className="font-medium">{cart.length} items</span></div>
-        <div className="text-xs py-1">User: <span className="font-medium">{user ? user.name : "Guest"}</span></div>
+          <button
+            onClick={() => setCurrentPage("checkout")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "checkout" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            Checkout
+          </button>
+          <button
+            onClick={() => setCurrentPage("account")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "account" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            Account
+          </button>
+          <button
+            onClick={() => setCurrentPage("about")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "about" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            About
+          </button>
+          <button
+            onClick={() => setCurrentPage("sitemap")}
+            className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${currentPage === "sitemap" ? "bg-gray-700 font-medium" : ""}`}
+          >
+            Site Map
+          </button>
+          <hr className="my-3" />
+          <div className="text-xs py-1">Cart: <span className="font-medium">{cart.length} items</span></div>
+          <div className="text-xs py-1">User: <span className="font-medium">{user ? user.name : "Guest"}</span></div>
+        </div>
+        )}
       </div>
-      )}
+      <Footer />
     </div>
   );
 };
