@@ -22,6 +22,7 @@ import CheckoutPage from "./src/views/CheckoutPage";
 import OrderConfirmationPage from "./src/views/OrderConfirmationPage";
 import AccountPage from "./src/views/AccountPage";
 import AboutPage from "./src/views/AboutPage";
+import SearchResultsPage from "./src/views/SearchResultsPage";
 
 // Główny komponent aplikacji
 const WireframeApp = () => {
@@ -178,6 +179,7 @@ const WireframeApp = () => {
             }
           />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/search" element={<SearchResultsPage />} />
           <Route
             path="/sitemap"
             element={<SiteMap setCurrentPage={(path) => navigate(path)} />}
@@ -287,6 +289,14 @@ const WireframeApp = () => {
               }`}
             >
               About
+            </Link>
+            <Link
+              to="/search?q=masło"
+              className={`block w-full text-left py-1.5 px-2 my-0.5 rounded hover:bg-gray-700 ${
+                location.pathname === "/search" ? "bg-gray-700 font-medium" : ""
+              }`}
+            >
+              Search Results
             </Link>
             <Link
               to="/sitemap"

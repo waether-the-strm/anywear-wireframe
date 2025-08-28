@@ -57,6 +57,11 @@ const tree = [
     ],
   },
   {
+    label: "Wyniki wyszukiwania",
+    page: "/search",
+    children: [],
+  },
+  {
     label: "Mapa strony",
     page: "sitemap",
     children: [],

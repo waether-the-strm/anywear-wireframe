@@ -47,7 +47,7 @@ const Navigation = ({
               </span>
               <div
                 className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-56 bg-white border border-gray-200 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-30"
-                style={{ minWidth: '200px' }}
+                style={{ minWidth: "200px" }}
               >
                 <Link
                   to="/tribal"
@@ -117,7 +117,11 @@ const Navigation = ({
               </svg>
             </button>
             {/* Search */}
-            <button className="p-2 text-gray-600 hover:text-gray-900">
+            <button
+              className="p-2 text-gray-600 hover:text-gray-900"
+              onClick={() => setCurrentPage("/search?q=bluza")}
+              aria-label="Przejdź do wyszukiwania"
+            >
               <svg
                 className="w-5 h-5"
                 fill="none"
