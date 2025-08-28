@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;@keyframes fadeIn{0%{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.animate-fade-in{animation:fadeIn .2s ease-out forwards}body{@apply antialiased;}.bg-black-translucent{background-color:#0009}
