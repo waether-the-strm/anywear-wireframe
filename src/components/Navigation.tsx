@@ -7,6 +7,7 @@ type NavigationProps = {
   setUser?: (user: any) => void;
   cart?: any[];
   toggleWireframeNav?: () => void;
+  toggleSearch?: () => void;
 };
 
 const Navigation = ({
@@ -15,6 +16,7 @@ const Navigation = ({
   setUser,
   cart,
   toggleWireframeNav,
+  toggleSearch,
 }: NavigationProps) => {
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -119,8 +121,8 @@ const Navigation = ({
             {/* Search */}
             <button
               className="p-2 text-gray-600 hover:text-gray-900"
-              onClick={() => setCurrentPage("/search?q=bluza")}
-              aria-label="Przejdź do wyszukiwania"
+              onClick={toggleSearch}
+              aria-label="Otwórz wyszukiwarkę"
             >
               <svg
                 className="w-5 h-5"
