@@ -30,7 +30,63 @@ const WireframeApp = () => {
   const [cart, setCart] = useState([]);
   const [checkoutAsGuest, setCheckoutAsGuest] = useState(false);
   const [showWireframeNav, setShowWireframeNav] = useState(false);
-  const products = [];
+  // Przykładowe produkty (mock)
+  const products = [
+    {
+      id: 1,
+      name: "Tribal T-shirt Black",
+      price: "149,00 zł",
+      collection: "tribal",
+      description: "Czarny t-shirt z kolekcji Tribal.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/tribal-t-shirt-black.jpg",
+    },
+    {
+      id: 2,
+      name: "Tribal hoodie black",
+      price: "249,00 zł",
+      collection: "tribal",
+      description: "Czarna bluza z kapturem z kolekcji Tribal.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/tribal-hoodie-black.jpg",
+    },
+    {
+      id: 3,
+      name: "Velvet pants beige",
+      price: "149,00 zł",
+      collection: "velvet",
+      description: "Beżowe spodnie z aksamitu.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/velvet-pant-beige.jpg",
+    },
+    {
+      id: 4,
+      name: "Corduroy pants navy",
+      price: "249,00 zł",
+      collection: "corduroy",
+      description: "Granatowe spodnie sztruksowe.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/corduroy-pants-navy.jpg",
+    },
+    {
+      id: 5,
+      name: "Plaid pants grey",
+      price: "149,00 zł",
+      collection: "plaid",
+      description: "Szare spodnie w kratę.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/plaid-pants-grey.jpg",
+    },
+    {
+      id: 6,
+      name: "Anywear cap black",
+      price: "69,00 zł",
+      collection: "accessories",
+      description: "Czarna czapka z daszkiem.",
+      image:
+        "https://anywear.pl/wp-content/uploads/2023/07/anywear-cap-black.jpg",
+    },
+  ];
   const navigate = useNavigate();
   const location = useLocation();
   const pathToLabel = {
